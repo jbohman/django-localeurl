@@ -2,7 +2,7 @@ import re
 from django.conf import settings
 
 SUPPORTED_LOCALES = dict(
-    (code.lower(), name) for code, name in settings.LANGUAGES)
+    (code.lower(), name) for code, name in getattr(settings, 'LOCALEURL_SUPPORTED_LOCALES', settings.LANGUAGES))
 # Issue #15. Sort locale codes to avoid matching e.g. 'pt' before 'pt-br'
 LOCALES_RE = '|'.join(
     sorted(SUPPORTED_LOCALES.keys(), key=lambda i: len(i), reverse=True))
